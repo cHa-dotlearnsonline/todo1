@@ -9,3 +9,4 @@ class Category(models.Model):
 
 class TodoListItem(models.Model):
     item = models.CharField(max_length=500)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
