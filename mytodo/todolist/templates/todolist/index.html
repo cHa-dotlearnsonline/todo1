@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        </title> My test page </title>
+    </head>
+    <body>
+    <ul>
+    {% if latest_cat_list %}
+        {% for category in latest_cat_list %}
+        <li><a href="">category.cat_name</li>
+        {% endfor %}
+    {% else %}
+    <p>Please create some todolist categories</p>
+    {% endif %}
+    <button>Create+</button>
+    </ul>
+    </body>
+</html>
