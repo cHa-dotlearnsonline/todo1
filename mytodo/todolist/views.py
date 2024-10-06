@@ -6,6 +6,7 @@ from .models import Category, TodoListItem
 # Create your views here.
 
 def index(request):
+    """This is jus the index page go show stuff"""
     latest_category_list = Category.objects.all()
     output = "\n,".join([category.cat_name for category in latest_category_list])
     context = {
