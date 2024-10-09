@@ -8,7 +8,6 @@ from .models import Category, TodoListItem
 def index(request):
     """This is jus the index page go show stuff"""
     latest_category_list = Category.objects.all()
-    output = "\n,".join([category.cat_name for category in latest_category_list])
     context = {
         "latest_cat_list" : latest_category_list,
         }
@@ -21,8 +20,18 @@ def create_category(request):
 
 def view_category(request, category_id):
     """ This allows users to view items under each category"""
-    pass
+    category_id = int(category_id)
+    category = Category.objects.get(pk=category_id)
+    name = category.cat_name
+    todoItems = TodoListItem.objects.filter(category = category)
+    context = {
+        "items": todoItems,
+        "category": name
+    }
+    return render(request, "todolist/category.html", context)
 
 def add_item(request, category_id):
     """ This allows the user to add an item to a specific category"""
+
     pass
+ 
