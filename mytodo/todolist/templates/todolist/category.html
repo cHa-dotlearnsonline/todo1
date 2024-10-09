@@ -15,6 +15,10 @@
         {% endfor %}
         
     </ul>
-    
+    <form action="{% url 'add' id  %}" method="post">
+        {% csrf_token %}
+        <input name="item" type="text">
+        <button type="submit">Add</button>
+    </form>
 </body>
 </html>

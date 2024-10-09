@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 # from django.template import loader
 
 from .models import Category, TodoListItem
@@ -26,12 +27,18 @@ def view_category(request, category_id):
     todoItems = TodoListItem.objects.filter(category = category)
     context = {
         "items": todoItems,
-        "category": name
+        "category": name,
+        "id": category_id
     }
     return render(request, "todolist/category.html", context)
 
 def add_item(request, category_id):
     """ This allows the user to add an item to a specific category"""
-
-    pass
+    if request.method == "POST":
+        id = int(category_id)
+        category = Category.objects.get(pk=id)
+        item = request.POST["item"]
+        the_item =TodoListItem(item=item, category = category)
+        the_item.save()
+        return HttpResponseRedirect(reverse("category", args=(id,)))
  
